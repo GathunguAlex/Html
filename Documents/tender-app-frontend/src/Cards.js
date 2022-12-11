@@ -1,65 +1,44 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import React from "react";
-import {Container, Col, Button , Card} from 'react-bootstrap'
+import React,{useEffect, useState} from "react"
 
-export default class Cards extends React.Component{
-  state={
-    loading: true,
-    tender:[]
+ function Cards (){
+
+  const [tender, setTender]=useState([])
+  useEffect(()=>{
+    fetch(`http://localhost:3000/tenders`).then(r => {
+      if(r.ok){
+        
+        r.json().then(data => setTender(data))
+      }
+    })
+  },[])
+
+  const myStyles = {
+    color: "black",
+    backgroundColor: "red",
+    fontSize: "3rem",
+    display: "block"
   }
-async componentDidMount(){
- const url =`/tenders`
- const response =await fetch(`/tenders`)
- const data = await response.json()
- 
- 
- const {
-  Tenders=[],
-  tenderList = Tenders.slice(0,3).map(item=>item.Tenders).flat()
- } = data
+  
+  const tenderComponents = tender.map(tend => {
+    return (
+        <div key={tend.id}>
+            {/* <img src="..." class="card-img-top" alt="..."/> */}
+            <div style={myStyles} >
+                <p >{tend.tendername}</p>
+                <p >{tend.tendernumber}</p>
+            </div>
+        </div>
+    )
+  })
 
-this.setState({Tenders:tenderList, loading:false})
-
-}
-
-render(){
-if (this.state.loading) {
-  return <div>Loading....</div>
-}
-
-  if (!this.state.tender.length){
-    return <div>No tender available</div>
-  }
-
-  return(
-<Container>  
-<Col>   
-        <Card className="mb-3" style={{color: "#000"}}> 
-          <Card.Body>
-            <Card.Title>Tender Description</Card.Title>
-            <Card.Text></Card.Text>
-            <Button variant="info" size="lg"> Bid </Button>{""}
-          </Card.Body>
-        </Card>
-
-        <Card className="mb-3" style={{color: "#000"}}> 
-          <Card.Body>
-            <Card.Title>Tender Description</Card.Title>
-            <Card.Text></Card.Text>
-            <Button variant="info" size="lg"> Bid </Button>{""}
-          </Card.Body>
-        </Card>
-
-        <Card className="mb-3" style={{color: "#000"}}> 
-          <Card.Body>
-            <Card.Title>Tender Description</Card.Title>
-            <Card.Text></Card.Text>
-            <Button variant="info" size="lg"> Bid </Button>{""}
-          </Card.Body>
-        </Card>
-
-        </Col>
-        </Container>
+  return (
+    <>
+        {tenderComponents}
+    </>
   )
-  }     
-};
+ };
+
+
+    
+
+ export default Cards

@@ -13,7 +13,7 @@ function onSubmit(e){
         username,
         password
     }
-    fetch(`/users`,{
+    fetch(`http://localhost:3000/users`,{
      method: "POST",
      headers: {'Content-Type':'application/json'},
      body:JSON.stringify(user)
@@ -34,13 +34,16 @@ return (
 </Form.Group>
 <Form.Group controlId ="formPassword">
   <Form.Control type="Password" placeholder= "Password"/>
+  <Form.Group controlId ="formPassword">
+  <Form.Control type="Password" placeholder= "Confirm Password"/>
+        </Form.Group>
 <Button variant="info" size="lg">
           signup{" "}
         </Button>
         {""}
         </Form.Group>
-        
 
+  
 </section>
 )
 };
