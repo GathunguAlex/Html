@@ -34,6 +34,7 @@ function App() {
    <Route path="/auth" element={<Auth/>}/>
    <Route path="/cards" element = {<Cards/>}/>
    <Route path="/" element = {<LandingPage/>}/>
+   
       </Routes>
     </header>
     </div>

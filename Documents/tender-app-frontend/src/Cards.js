@@ -1,6 +1,8 @@
 import React,{useEffect, useState} from "react"
 
  function Cards (){
+  const [editing, setEditing] = useState(false)
+  const [formData, setFormData] = useState({id: null, username: "", usernumber: ""})
 
   const [tender, setTender]=useState([])
   useEffect(()=>{
@@ -27,14 +29,70 @@ import React,{useEffect, useState} from "react"
                 <p >{tend.tendername}</p>
                 <p >{tend.tendernumber}</p>
             </div>
+            <div>
+            <button onClick={()=>handleDelete(tend)}>Delete</button>
+              <button>Edit</button>
+
+            </div>
         </div>
+    
     )
   })
 
-  return (
-    <>
-        {tenderComponents}
-    </>
+  function handleEdit(editedTender){
+    fetch(`/renders/${editedTender.id}`, {
+      method: 'PATCH',
+      headers: {
+        "Content-Type": 'application/json',
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(editedTender)
+    })
+    .then(r => {
+      if(r.ok){
+        r.json().then(editedTender => {
+          setTender(tender.map(tend => {
+            if(tend.id === editedTender.id){
+              return editedTender
+            }else {
+              return tend
+            }
+          }))
+        })
+      }
+    })
+  }
+
+
+  function handleDelete(deletedTender){
+    console.log(deletedTender)
+    fetch(`http://localhost:3000/tenders/${deletedTender.id}`, {method: 'DELETE'})
+    .then(r => {
+      if(r.ok){
+        setTender(tender.filter(tend => deletedTender.id !== tend.id))
+      }
+    })
+  }
+
+ return (
+      <div>
+          <div>
+              {tenderComponents}
+          </div>
+            
+
+
+            <form>
+              <label htmlFor="tendername">Tender Name</label>
+              <input name="tendername" />
+
+              <label htmlFor="tendernumber">Tender Number</label>
+              <input name="tendernumber" />
+
+              <input type="submit" value="create tender"/>
+            </form>
+      </div>
+
   )
  };
 
