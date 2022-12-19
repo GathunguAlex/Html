@@ -39,7 +39,7 @@ function Cards() {
     }
 
     function handleEdit(editedTender) {
-        fetch(`/renders/${editedTender.id}`, {
+        fetch(`http://localhost:3000/tenders/${editedTender.id}`, {
             method: 'PATCH',
             headers: {
                 "Content-Type": 'application/json',
@@ -65,7 +65,7 @@ function Cards() {
     }
 
     function handlePost(newTender){
-        fetch('/renders', {
+        fetch('http://localhost:3000/tenders', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
