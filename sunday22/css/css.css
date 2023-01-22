@@ -1,0 +1,14 @@
+/* What is the specific HTML we want to style?
+What are the qualities we want to modify (e.g. the properties of text in a paragraph)?
+How do we want to modify the qualities of the element (e.g. font family, font color, font size, line height, letter spacing etc.)? */
+/* 
+CSS selectors are a way of declaring which HTML elements you wish to style. Selectors can appear a few different ways: The type of HTML element(h1, p, div, etc.) The value of an element's id or class (<p id=' idvalue'></p>, <p class=' classname'></p>)
+ The value of an element's attributes (value="hello")
+ The element's relationship with surrounding elements (a p within an element with class of .infobox) */
+/* 
+ links : https: //developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics
+ links : https: //www.smashingmagazine.com/2007/07/css-specificity-things-you-should-know/ */
+
+           /* what is css specifity */
+ /* https: //specificity.keegan.st/ */
+ /* https: //css-tricks.com/specifics-on-css-specificity/ */
